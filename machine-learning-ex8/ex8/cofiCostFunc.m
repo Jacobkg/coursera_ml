@@ -74,10 +74,10 @@ for k = 1:num_features
       if R(i,j) == 1
         x_i = X(i,:)';
         theta_j = Theta(j,:)';
-        sum += ((theta_j'*x_i - Y(i,j)) * Theta(j,k)) + (lambda*X(i,k));
+        sum += (theta_j'*x_i - Y(i,j)) * Theta(j,k);
       endif
     endfor
-    X_grad(i,k) = sum;
+    X_grad(i,k) = sum + lambda*X(i,k);
   endfor
 endfor
 
@@ -88,10 +88,10 @@ for k = 1:num_features
       if R(i,j) == 1
         x_i = X(i,:)';
         theta_j = Theta(j,:)';
-        sum += ((theta_j'*x_i - Y(i,j)) * X(i,k)) + (lambda*Theta(j,k));
+        sum += (theta_j'*x_i - Y(i,j)) * X(i,k);
       endif
     endfor
-    Theta_grad(j,k) = sum;
+    Theta_grad(j,k) = sum + lambda*Theta(j,k);
   endfor
 endfor
 
